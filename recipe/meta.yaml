@@ -19,6 +19,8 @@ requirements:
     - python >=3.5
     - cython
     - pip
+    - setuptools
+    - wheel
   run:
     - python >=3.5
     - pytz
