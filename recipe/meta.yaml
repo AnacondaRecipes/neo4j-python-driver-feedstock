@@ -16,16 +16,21 @@ requirements:
   build:
     - {{ compiler('c') }}
   host:
-    - python
+    - python >=3.5
     - cython
     - pip
   run:
-    - python
-    - neotime
+    - python >=3.5
+    - pytz
 
 test:
   imports:
     - neo4j
+    - neo4j.graph
+  commands:
+    - pip check
+  requires:
+    - pip
 
 about:
   home: https://github.com/neo4j/neo4j-python-driver
@@ -33,6 +38,8 @@ about:
   license_file: LICENSE.txt
   license_family: Apache
   summary: 'Database connector for Neo4j graph database'
+  dev_url: https://github.com/neo4j/neo4j-python-driver
+  doc_url: https://neo4j.com/docs/api/python-driver/current/
 
 extra:
   recipe-maintainers:
