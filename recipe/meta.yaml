@@ -1,4 +1,4 @@
-{% set version = "4.3.1" %}
+{% set version = "4.3.2" %}
 
 package:
   name: neo4j-python-driver
@@ -6,7 +6,7 @@ package:
 
 source:
   url: https://github.com/neo4j/neo4j-python-driver/archive/{{ version }}.tar.gz
-  sha256: d652f101e832d734731bef8336b139baf43787b2f725658d7b7e48f88dfee8b8
+  sha256: 2f7c11cd4400f3bbbc29d2933ab9a6066d2eaa445f691455fcf34772d9bd10d1
 
 build:
   number: 0
