@@ -16,13 +16,13 @@ requirements:
   build:
     - {{ compiler('c') }}
   host:
-    - python >=3.5
+    - python
     - cython
     - pip
     - setuptools
     - wheel
   run:
-    - python >=3.5
+    - python
     - pytz
 
 test:
