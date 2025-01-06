@@ -11,7 +11,7 @@ source:
 build:
   number: 0
   skip: True  # [py<38]
-  script: python -m pip install --no-deps --ignore-installed .
+  script: {{ PYTHON }} -m pip install . --no-deps --no-build-isolation --ignore-installed -vvv
 
 requirements:
   build:
@@ -40,6 +40,8 @@ about:
   license: Apache-2.0
   license_file: LICENSE.txt
   license_family: Apache
+  description: |
+    The official Neo4j driver for Python. 
   summary: 'Database connector for Neo4j graph database'
   dev_url: https://github.com/neo4j/neo4j-python-driver
   doc_url: https://neo4j.com/docs/api/python-driver/current/
