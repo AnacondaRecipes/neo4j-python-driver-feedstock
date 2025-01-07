@@ -24,9 +24,9 @@ requirements:
     - python
     - pytz
   run_constrained:
-    - pandas
-    - numpy
-    - pyarrow
+    - pandas >=1.1.0,<3.0.0
+    - numpy >=1.7.0 < 3.0.0
+    - pyarrow >=1.0.0
 
 test:
   imports:
