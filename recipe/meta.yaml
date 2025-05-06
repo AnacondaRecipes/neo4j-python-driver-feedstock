@@ -1,41 +1,94 @@
-{% set version = "5.27.0" %}
+{% set name = "neo4j" %}
+{% set version = "5.28.1" %}
 
 package:
-  name: neo4j-python-driver
+  name: {{ name }}-suite
   version: {{ version }}
 
 source:
-  url: https://github.com/neo4j/neo4j-python-driver/archive/{{ version }}.tar.gz
-  sha256: cefd4296efe564b2feb96f628699e0cbf421888ba5815a1b92b2c1b5e71ff07d
+  url: https://github.com/{{ name }}/{{ name }}-python-driver/archive/refs/tags/{{ version }}.tar.gz
+  sha256: b5323398b98f8ad0ef280edb2a8c855552a00a1a18ac4cf44810c8bc7c2035e8
 
 build:
   number: 0
-  skip: True  # [py<38]
-  script: {{ PYTHON }} -m pip install . --no-deps --no-build-isolation --ignore-installed -vvv
 
-requirements:
-  host:
-    - python
-    - pip
-    - setuptools
-    - tomlkit
-    - wheel
-  run:
-    - python
-    - pytz
-  run_constrained:
-    - pandas >=1.1.0,<3.0.0
-    - numpy >=1.7.0, < 3.0.0
-    - pyarrow >=1.0.0
-
-test:
-  imports:
-    - neo4j
-    - neo4j.graph
-  commands:
-    - pip check
-  requires:
-    - pip
+outputs:
+  - name: neo4j-python-driver
+    build:
+      skip: True  # [py<38]
+    script: build_base.sh  # [unix]
+    script: build_base.bat  # [win]
+    requirements:
+      host:
+        - python
+        - pip
+        - setuptools >=75.3.0  # [py==38]
+        - setuptools >=75.6.0  # [py>38]
+        - tomlkit >=0.12.5
+        - wheel
+      run:
+        - python
+        - pytz
+      run_constrained:
+        - pandas >=1.1.0,<3.0.0
+        - numpy >=1.7.0,<3.0.0
+        - pyarrow >=1.0.0
+    # E AttributeError: Attributes cannot start with 'assert' or 'assret'
+    {% set tests_to_skip = "test_full_pool_re_auth_async" %}
+    {% set tests_to_skip = tests_to_skip + " or test_from_timestamp_without_tz" %}
+    test:
+      source_files:
+        - tests
+      imports:
+        - neo4j
+        - neo4j.graph
+      commands:
+        - pip check
+        - pytest -vv -k "not ({{ tests_to_skip }})" tests/unit/common
+      requires:
+        - pip
+        - pytest
+        - pytest-asyncio
+        - pytest-mock >=3.11.1
+        - pandas >=1.1.0,<3.0.0
+        - numpy >=1.7.0,<3.0.0
+        - freezegun >=1.5.1
+        - pyarrow >=10.0.1
+        - mock
+  
+  # neo4j AND neo4j-driver is the same pkgs.
+  
+  # https://pypi.org/project/neo4j/
+  - name: {{ name }}
+    build:
+      noarch: generic
+    requirements:
+      run:
+        - {{ pin_subpackage('neo4j-python-driver', max_pin="x.x.x") }}
+    test:
+      requires:
+        - pip
+      commands:
+        - pip check
+      imports:
+        - neo4j
+        - neo4j.graph
+  
+  # https://pypi.org/project/neo4j-driver/
+  - name: {{ name }}-driver
+    build:
+      noarch: generic
+    requirements:
+      run:
+        - {{ pin_subpackage('neo4j-python-driver', max_pin="x.x.x") }}
+    test:
+      requires:
+        - pip
+      commands:
+        - pip check
+      imports:
+        - neo4j
+        - neo4j.graph
 
 about:
   home: https://github.com/neo4j/neo4j-python-driver
