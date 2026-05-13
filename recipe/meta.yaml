@@ -1,7 +1,5 @@
 {% set name = "neo4j" %}
 {% set version = "6.2.0" %}
-{% set tests_to_skip = "test_full_pool_re_auth_async" %}
-{% set tests_to_skip = tests_to_skip + " or test_from_timestamp_without_tz" %}
 
 package:
   name: {{ name }}-suite
@@ -35,7 +33,10 @@ outputs:
         - pandas >=1.1.0,<3.0.0
         - numpy >=1.7.0,<3.0.0
         - pyarrow >=1.0.0
+
     # E AttributeError: Attributes cannot start with 'assert' or 'assret'
+    {% set tests_to_skip = "test_full_pool_re_auth_async" %}
+    {% set tests_to_skip = tests_to_skip + " or test_from_timestamp_without_tz" %}
     test:
       source_files:
         - tests
