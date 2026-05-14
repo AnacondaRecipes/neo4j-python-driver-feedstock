@@ -35,8 +35,7 @@ outputs:
         - pyarrow >=1.0.0
 
     # E AttributeError: Attributes cannot start with 'assert' or 'assret'
-    {% set tests_to_skip = "test_full_pool_re_auth_async" %}
-    {% set tests_to_skip = tests_to_skip + " or test_from_timestamp_without_tz" %}
+    {% set tests_to_skip = "test_full_pool_re_auth_async or test_from_timestamp_without_tz" %}
     test:
       source_files:
         - tests
