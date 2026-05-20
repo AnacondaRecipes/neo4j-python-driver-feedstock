@@ -55,7 +55,7 @@ outputs:
         - numpy >=1.21.2,<3.0.0
         - freezegun >=1.5.5
         - pyarrow >=6.0.0,<25.0.0
-        - mock >=5.2.0
+        - mock
   # neo4j AND neo4j-driver is the same pkgs.
   # https://pypi.org/project/neo4j/
   - name: {{ name }}
