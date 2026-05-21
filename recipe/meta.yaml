@@ -15,7 +15,7 @@ build:
 outputs:
   - name: neo4j-python-driver
     build:
-      skip: true  # [py<38]
+      skip: true  # [py<310]
     script: build_base.sh  # [unix]
     script: build_base.bat  # [win]
     requirements:
