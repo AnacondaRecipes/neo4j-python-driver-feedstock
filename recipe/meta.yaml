@@ -10,7 +10,7 @@ source:
   sha256: 3ce6681442fd30c19cee85691b580de566d30c62a580b7551ae3f8de845b70ad
 
 build:
-  number: 0
+  number: 1
 
 outputs:
   - name: neo4j-python-driver
