@@ -10,7 +10,7 @@ source:
   sha256: 3ce6681442fd30c19cee85691b580de566d30c62a580b7551ae3f8de845b70ad
 
 build:
-  number: 0
+  number: 1
 
 outputs:
   - name: neo4j-python-driver
@@ -57,7 +57,7 @@ outputs:
         - pyarrow >=6.0.0,<25.0.0
         - mock
   # neo4j AND neo4j-driver is the same pkgs.
-  # https://pypi.org/project/neo4j/
+  # https://pypi.org/project/neo4j
   - name: {{ name }}
     build:
       noarch: generic
@@ -72,7 +72,7 @@ outputs:
       imports:
         - neo4j
         - neo4j.graph
-  # https://pypi.org/project/neo4j-driver/
+  # https://pypi.org/project/neo4j-driver
   - name: {{ name }}-driver
     build:
       noarch: generic
@@ -97,7 +97,7 @@ about:
     The official Neo4j driver for Python.
   summary: Database connector for Neo4j graph database
   dev_url: https://github.com/neo4j/neo4j-python-driver
-  doc_url: https://neo4j.com/docs/api/python-driver/current/
+  doc_url: https://neo4j.com/docs/api/python-driver/current
 
 extra:
   recipe-maintainers:
